@@ -1,0 +1,22 @@
+1. Copy the sg_oauth directory to <directory of your moodle>/local/
+2. Login as an admin and visit the notifications page to install the plugin.
+3. At this point the necessary database tables have been setup.
+   You'll need to create records for your consumers by manually
+   inserting into the database.  Some sample sql insert commands are:
+
+   For wordpress:
+
+   mysql> insert into oauth_consumers (name, callbackurl, cancelurl, secret, consumerkey, timecreated, timemodified)
+          values ('Wordpress', 'http://my.wordpress.url/wp-load.php?action=sg_oauth&service=logincallback',
+                  'http://my.wordpress.url/wp-login.php', 'mysecretstring', 'mywordpressconsumerkey',
+                  unix_timestamp(current_timestamp()), unix_timestamp(current_timestamp()));
+
+   For elgg:
+
+   mysql> insert into oauth_consumers (name, callbackurl, cancelurl, secret, consumerkey, timecreated, timemodified)
+          values ('Elgg', 'http://my.elgg.url/pg/connect/callback/', 'http://my.elgg.url',
+                  'mysecretstring', 'myelggconsumerkey',
+                  unix_timestamp(current_timestamp()), unix_timestamp(current_timestamp()));
+
+   It's important that you use the same url path and query strings for callbackurl and cancelurl and just change the host url.
+   The secret and consumerkey you used must match the client settings when you install the client on either wordpress or elgg.

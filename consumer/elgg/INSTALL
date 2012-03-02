@@ -1,0 +1,4 @@
+1. Copy the sgoauth directory to your elgg modules directory.
+2. Login as an admin and enable the plugin.
+3. Configure the settings for the plugin.  NOTE: The consumer key and consumer secret must match what is on moodle.  The Server Base URL is your moodle url without a trailing slash.
+4. Your login page form should now have a "Sign in through one of these peers" option.

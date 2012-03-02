@@ -1,0 +1,5 @@
+1. Copy this sg-oauth directory to your wordpress plugins directory.
+2. Login as an admin user to your wordpress instance.
+3. Activate the "SG OAuth" plugin.
+4. Configure the plugin by going to "Settings -> SG OAuth Settings" and setting values as necessary.  NOTE: The consumer key and secret must match what is on moodle.  The OAuth Server Base URL is your moodle url without a trailing slash.
+5. Visit your login page.  There should now be an option to choose an alternate login below your login form.  This will point to your moodle oauth server as defined in the plugin options.

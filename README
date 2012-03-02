@@ -1,0 +1,24 @@
+A simple Single Sign-On OAuth server implementation for Moodle 2.
+
+This is a beta release and has been tested on Moodle 2.0.4 to Moodle 2.1.1.
+
+This version doesn't have a user interface for creating consumer data so you'll need to insert directly into the database.
+This package provides sample consumer client implementations for elgg and wordpress.
+
+See server/INSTALL for instructions on how to install the server component in Moodle.
+See consumer/elgg/INSTALL if you want to SSO to an elgg installation.
+See consumer/wordpress/INSTALL if you want to SSO to a wordpress installation.
+
+==========
+
+Author: Deds Castillo (deds@solutiongrove.com)
+Copyright (c) 2011 Solution Grove (http://solutiongrove.com)
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="local/sg_oauth/db" VERSION="20110706" COMMENT="XMLDB file for SG OAuth"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="oauth_tokens" COMMENT="oauth tokens" NEXT="oauth_consumers">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="token"/>
+        <FIELD NAME="token" TYPE="char" LENGTH="50" SEQUENCE="false" PREVIOUS="id" NEXT="tokentype"/>
+        <FIELD NAME="tokentype" TYPE="char" LENGTH="10" NOTNULL="true" SEQUENCE="false" PREVIOUS="token" NEXT="consumerkey"/>
+        <FIELD NAME="consumerkey" TYPE="char" LENGTH="50" SEQUENCE="false" PREVIOUS="tokentype" NEXT="secret"/>
+        <FIELD NAME="secret" TYPE="char" LENGTH="50" SEQUENCE="false" PREVIOUS="consumerkey" NEXT="callbackurl"/>
+        <FIELD NAME="callbackurl" TYPE="text" LENGTH="small" SEQUENCE="false" PREVIOUS="secret" NEXT="userid"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="callbackurl" NEXT="validated"/>
+        <FIELD NAME="validated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="userid" NEXT="verifier"/>
+        <FIELD NAME="verifier" TYPE="char" LENGTH="50" SEQUENCE="false" PREVIOUS="validated" NEXT="timecreated"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="verifier" NEXT="timemodified"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="timecreated"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="userid"/>
+        <KEY NAME="userid" TYPE="foreign" FIELDS="userid" REFTABLE="user" REFFIELDS="id" PREVIOUS="primary"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="token" UNIQUE="false" FIELDS="token" NEXT="tokentype"/>
+        <INDEX NAME="tokentype" UNIQUE="false" FIELDS="tokentype" PREVIOUS="token" NEXT="consumerkey"/>
+        <INDEX NAME="consumerkey" UNIQUE="false" FIELDS="consumerkey" PREVIOUS="tokentype"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="oauth_consumers" COMMENT="oauth consumers" PREVIOUS="oauth_tokens" NEXT="oauth_nonces">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="name"/>
+        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="id" NEXT="callbackurl"/>
+        <FIELD NAME="callbackurl" TYPE="text" LENGTH="small" NOTNULL="false" SEQUENCE="false" PREVIOUS="name" NEXT="cancelurl"/>
+        <FIELD NAME="cancelurl" TYPE="text" LENGTH="small" NOTNULL="false" SEQUENCE="false" PREVIOUS="callbackurl" NEXT="secret"/>
+        <FIELD NAME="secret" TYPE="char" LENGTH="50" NOTNULL="true" SEQUENCE="false" PREVIOUS="cancelurl" NEXT="consumerkey"/>
+        <FIELD NAME="consumerkey" TYPE="char" LENGTH="50" NOTNULL="true" SEQUENCE="false" PREVIOUS="secret" NEXT="autoauthorize"/>
+        <FIELD NAME="autoauthorize" TYPE="int" LENGTH="1" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="consumerkey" NEXT="timecreated"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="autoauthorize" NEXT="timemodified"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="timecreated"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="consumerkey" UNIQUE="true" FIELDS="consumerkey" NEXT="secret"/>
+        <INDEX NAME="secret" UNIQUE="true" FIELDS="secret" PREVIOUS="consumerkey"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="oauth_nonces" COMMENT="oauth nonces" PREVIOUS="oauth_consumers">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="consumerkey"/>
+        <FIELD NAME="consumerkey" TYPE="char" LENGTH="50" SEQUENCE="false" PREVIOUS="id" NEXT="token"/>
+        <FIELD NAME="token" TYPE="char" LENGTH="50" SEQUENCE="false" PREVIOUS="consumerkey" NEXT="nonce"/>
+        <FIELD NAME="nonce" TYPE="char" LENGTH="50" SEQUENCE="false" PREVIOUS="token" NEXT="expires"/>
+        <FIELD NAME="expires" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="nonce"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="consumerkey" UNIQUE="false" FIELDS="consumerkey" NEXT="token"/>
+        <INDEX NAME="token" UNIQUE="false" FIELDS="token" PREVIOUS="consumerkey" NEXT="nonce"/>
+        <INDEX NAME="nonce" UNIQUE="false" FIELDS="nonce" PREVIOUS="token" NEXT="consumerkey-token-nonce"/>
+        <INDEX NAME="consumerkey-token-nonce" UNIQUE="true" FIELDS="consumerkey, token, nonce" PREVIOUS="nonce"/>
+      </INDEXES>
+    </TABLE>
+  </TABLES>
+</XMLDB>
