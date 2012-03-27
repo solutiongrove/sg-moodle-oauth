@@ -11,6 +11,7 @@ function oauth_get_server() {
 		$OAUTH_SERVER->add_signature_method(new OAuthSignatureMethod_HMAC_SHA1());
 		$OAUTH_SERVER->add_signature_method(new OAuthSignatureMethod_PLAINTEXT());
 	}
+
 	return $OAUTH_SERVER;
 }
 
@@ -125,6 +126,7 @@ function oauth_save_validated_token($token) {
   $verifier = oauth_generate_verifier();
   $tokEnt->verifier = $verifier;
   $tokEnt->timemodified = time();
+  $tokEnt->lastcheckedon = time();
   $DB->update_record('oauth_tokens', $tokEnt);
 
   return $tokEnt;
@@ -319,6 +321,30 @@ function oauth_delete_token_entity($token) {
   $DB->delete_records('oauth_tokens',array('id' => $token->id));
 }
 
+function oauth_refresh_token_lastcheckedon($token) {
+  global $DB;
+
+  $tokEnt = new stdClass();
+  $tokEnt->id = $token->id;
+  $tokEnt->lastcheckedon = time();
+  $DB->update_record('oauth_tokens', $tokEnt);
+
+  return $tokEnt;
+}
+
+function oauth_user_clear_lastchecked($user) {
+  global $DB;
+  if ( $tokens = $DB->get_records('oauth_tokens', array('tokentype'=>'access', 'userid'=>$user->id))) {
+    foreach ($tokens as $token) {
+      $updated_token = new StdClass();
+      $updated_token->id = $token->id;
+      $updated_token->lastcheckedon = 0;
+      $DB->update_record('oauth_tokens', $updated_token);
+      unset($updated_token);
+    }
+  }
+}
+
 // cleanup data
 function oauth_cleanup_tokens_and_nonces() {
   global $DB;
@@ -354,4 +380,5 @@ function oauth_cleanup_tokens_and_nonces() {
 
 
 }
+
 ?>

@@ -58,6 +58,7 @@ if ($tokEnt) {
   }
   GLOBAL $USER;
   if ($accEnt = oauth_lookup_access_token_entity($consumEnt->consumerkey, $USER->id)) {
+    oauth_refresh_token_lastcheckedon($accEnt);
     $url = $tokEnt->callbackurl;
     if (empty($url)) {
       $url = $consumEnt->callbackurl;

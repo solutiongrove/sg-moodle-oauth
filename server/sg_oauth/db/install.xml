@@ -14,8 +14,9 @@
         <FIELD NAME="callbackurl" TYPE="text" LENGTH="small" SEQUENCE="false" PREVIOUS="secret" NEXT="userid"/>
         <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="callbackurl" NEXT="validated"/>
         <FIELD NAME="validated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="userid" NEXT="verifier"/>
-        <FIELD NAME="verifier" TYPE="char" LENGTH="50" SEQUENCE="false" PREVIOUS="validated" NEXT="timecreated"/>
-        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="verifier" NEXT="timemodified"/>
+        <FIELD NAME="verifier" TYPE="char" LENGTH="50" SEQUENCE="false" PREVIOUS="validated" NEXT="lastcheckedon"/>
+        <FIELD NAME="lastcheckedon" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="verifier" NEXT="timecreated"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="lastcheckedon" NEXT="timemodified"/>
         <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="timecreated"/>
       </FIELDS>
       <KEYS>
