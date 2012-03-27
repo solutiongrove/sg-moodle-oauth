@@ -304,6 +304,17 @@ function oauth_execute_rest($consumer, $token, $service = '') {
         }
         $return_value = $students;
         break;
+      case 'user.verifylastchecked':
+        // verifies that the token is still active
+        // and refresh if it is
+        $valid_from = time() - (HOURSECS * 2);
+        if ($tokEnt->lastcheckedon == 0 || $tokEnt->lastcheckedon < $valid_from) {
+          $return_value = array("status"=>"fail");
+        } else {
+          oauth_refresh_token_lastcheckedon($tokEnt);
+          $return_value = array("status"=>"pass");
+        }
+        break;
       default:
         return NULL;
       }
