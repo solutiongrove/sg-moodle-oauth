@@ -1,6 +1,8 @@
 <?php
 
-require_once('OAuth.php');
+if (!class_exists('OAuthConsumer')) {
+  require_once('OAuth.php');
+}
 require_once('SGOAuthDataStore.php');
 
 // get or create an OAuth server
