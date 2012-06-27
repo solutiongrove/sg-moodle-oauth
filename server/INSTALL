@@ -11,10 +11,17 @@
                   'http://my.wordpress.url/wp-login.php', 'mysecretstring', 'mywordpressconsumerkey',
                   unix_timestamp(current_timestamp()), unix_timestamp(current_timestamp()));
 
-   For elgg:
+   For elgg 1.7:
 
    mysql> insert into oauth_consumers (name, callbackurl, cancelurl, secret, consumerkey, timecreated, timemodified)
           values ('Elgg', 'http://my.elgg.url/pg/connect/callback/', 'http://my.elgg.url',
+                  'mysecretstring', 'myelggconsumerkey',
+                  unix_timestamp(current_timestamp()), unix_timestamp(current_timestamp()));
+
+   For elgg 1.8:
+
+   mysql> insert into oauth_consumers (name, callbackurl, cancelurl, secret, consumerkey, timecreated, timemodified)
+          values ('Elgg', 'http://my.elgg.url/connect/callback/', 'http://my.elgg.url',
                   'mysecretstring', 'myelggconsumerkey',
                   unix_timestamp(current_timestamp()), unix_timestamp(current_timestamp()));
 

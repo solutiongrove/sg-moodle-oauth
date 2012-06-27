@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin_manifest>
+	<field key="author" value="Deds Castillo (deds@solutiongrove.com)" />
+	<field key="version" value="1.0" />
+	<field key="description" value="Custom OAuth Consumer for Moodle sgoauth local plugin (based on Justin Richer's OAuth plugin)" />
+	<field key="website" value="http://www.solutiongrove.com/" />
+	<field key="copyright" value="(C) Solution Grove 2011" />
+	<field key="licence" value="GNU Public License version 2" />
+	<field key="elgg_version" value="2010030101" />
+</plugin_manifest>
