@@ -1,3 +1,5 @@
-This is a beta release and has only been tested on Elgg 1.7.
+This is a consumer implementation for Elgg 1.8 compatible with Solution Grove's SSO OAuth server code.
+See https://github.com/solutiongrove/sg-moodle-oauth
 
-This is based on Justin Richer's OAuth plugin (http://community.elgg.org/pg/plugins/jricher/read/385119/oauth).
+The original code was based on Justin Richer's OAuth plugin at
+http://community.elgg.org/pg/plugins/jricher/read/385119/oauth
