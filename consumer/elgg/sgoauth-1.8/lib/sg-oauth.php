@@ -60,7 +60,17 @@ function sgoauth_create_or_login_user($user) {
     }
 
     if ( elgg_is_logged_in() ) {
-      forward();
+      // set forward url
+      if (isset($_SESSION['last_forward_from']) && $_SESSION['last_forward_from']) {
+        $forward_url = $_SESSION['last_forward_from'];
+        unset($_SESSION['last_forward_from']);
+      } elseif (get_input('returntoreferer')) {
+        $forward_url = REFERER;
+      } else {
+        // forward to main index page
+        $forward_url = '';
+      }
+      forward($forward_url);
     } else {
       $content .= "The system encountered a problem while logging you in.";
     }
