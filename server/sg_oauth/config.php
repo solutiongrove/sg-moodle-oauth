@@ -78,7 +78,7 @@ if ($action == 'delete') {
             $row = array();
             array_push($row, $consumer->name);
             array_push($row, html_writer::link($consumer->callbackurl, $consumer->callbackurl));
-            array_push($row, html_writer::link($consumer->cancelurl, $consumer->callbackurl));
+            array_push($row, html_writer::link($consumer->cancelurl, $consumer->cancelurl));
             array_push($row, $consumer->secret);
             array_push($row, $consumer->consumerkey);
 
