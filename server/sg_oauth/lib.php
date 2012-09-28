@@ -184,7 +184,7 @@ function sg_oauth_generate_verifier($length = 8) {
     $string = '';
 
     for ($p = 0; $p < $length; $p++) {
-        $string .= $characters[mt_rand(0, strlen($characters))];
+        $string .= $characters[mt_rand(0, strlen($characters)-1)];
     }
 
     return $string;
