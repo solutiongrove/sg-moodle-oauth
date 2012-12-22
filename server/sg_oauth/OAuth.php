@@ -4,8 +4,10 @@
 
 /* Generic exception class
  */
-class OAuthException extends Exception {
+if (class_exists('OAuthException') != true) {
+  class OAuthException extends Exception {
     // pass
+  }
 }
 
 class OAuthConsumer {
