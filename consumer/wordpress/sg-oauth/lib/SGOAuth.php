@@ -114,6 +114,12 @@ class SGOAuth {
     curl_setopt($ch, CURLOPT_TIMEOUT, 30);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 	curl_setopt($ch, CURLOPT_HTTPHEADER, array('Expect:'));
+	if( defined('WP_PROXY_HOST')){
+		curl_setopt($ch, CURLOPT_PROXY, WP_PROXY_HOST);
+	}
+	if (defined('WP_PROXY_PORT')){
+		curl_setopt($ch, CURLOPT_PROXYPORT, WP_PROXY_PORT);
+	}
     //////////////////////////////////////////////////
     ///// Set to 1 to verify Twitter's SSL Cert //////
     //////////////////////////////////////////////////
