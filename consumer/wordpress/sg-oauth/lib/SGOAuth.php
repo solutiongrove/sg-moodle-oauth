@@ -247,7 +247,7 @@ Class SGOAuthUser {
   function get_user_by_meta_value($key, $value){
     global $wpdb;
 
-    $id = $wpdb->get_results( $wpdb->prepare("SELECT * FROM {$wpdb->usermeta} WHERE meta_key = '{$key}' AND meta_value = '{$value}';") );
+    $id = $wpdb->get_results( $wpdb->prepare("SELECT * FROM {$wpdb->usermeta} WHERE meta_key = %s AND meta_value = %s", $key, $value) );
 
     if(!$id[0])
       return false;
